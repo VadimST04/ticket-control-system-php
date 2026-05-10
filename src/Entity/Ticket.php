@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Controller\Ticket\Enum\PriorityType;
+use App\Controller\Ticket\Enum\StatusType;
 use App\Repository\TicketRepository;
 use DateTime;
 use DateTimeImmutable;
@@ -10,8 +12,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use PriorityType;
-use StatusType;
 use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: TicketRepository::class)]
