@@ -4,7 +4,7 @@ bash:
 	$(DOCKER) exec php bash
 
 up:
-	$(DOCKER) up
+	$(DOCKER) up --build
 
 upd:
 	$(DOCKER) up -d
@@ -14,3 +14,7 @@ down:
 
 build:
 	$(DOCKER) build
+
+rebuild:
+	$(DOCKER) down
+	$(DOCKER) up --build
