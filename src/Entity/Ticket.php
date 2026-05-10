@@ -84,7 +84,7 @@ class Ticket
         $this->attachments = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
@@ -229,12 +229,7 @@ class Ticket
 
     public function removeComment(Comment $comment): static
     {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getTicket() === $this) {
-                $comment->setTicket(null);
-            }
-        }
+        $this->comments->removeElement($comment);
 
         return $this;
     }
@@ -259,12 +254,7 @@ class Ticket
 
     public function removeAttachment(Attachment $attachment): static
     {
-        if ($this->attachments->removeElement($attachment)) {
-            // set the owning side to null (unless already changed)
-            if ($attachment->getTicket() === $this) {
-                $attachment->setTicket(null);
-            }
-        }
+        $this->attachments->removeElement($attachment);
 
         return $this;
     }

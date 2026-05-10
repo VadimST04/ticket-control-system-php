@@ -42,7 +42,7 @@ class Attachment
         $this->createdAt = new DateTimeImmutable('now', new DateTimeZone('UTC'));
     }
 
-    public function getId(): ?int
+    public function getId(): ?Uuid
     {
         return $this->id;
     }

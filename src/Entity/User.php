@@ -300,12 +300,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeComment(Comment $comment): static
     {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getAuthor() === $this) {
-                $comment->setAuthor(null);
-            }
-        }
+        $this->comments->removeElement($comment);
 
         return $this;
     }
@@ -330,12 +325,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeAttachment(Attachment $attachment): static
     {
-        if ($this->attachments->removeElement($attachment)) {
-            // set the owning side to null (unless already changed)
-            if ($attachment->getUploadedBy() === $this) {
-                $attachment->setUploadedBy(null);
-            }
-        }
+        ;$this->attachments->removeElement($attachment);
 
         return $this;
     }
@@ -360,12 +350,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeNotification(Notification $notification): static
     {
-        if ($this->notifications->removeElement($notification)) {
-            // set the owning side to null (unless already changed)
-            if ($notification->getUser() === $this) {
-                $notification->setUser(null);
-            }
-        }
+        $this->notifications->removeElement($notification);
 
         return $this;
     }
