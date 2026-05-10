@@ -6,8 +6,8 @@ namespace App\Controller\User\Enum;
 
 enum RoleType: string
 {
-    case ADMIN = 'admin';
-    case MANAGER = 'manager';
-    case EMPLOYEE = 'employee';
-    case CUSTOMER = 'customer';
+    case ADMIN = 'ROLE_ADMIN';
+    case MANAGER = 'ROLE_MANAGER';
+    case EMPLOYEE = 'ROLE_EMPLOYEE';
+    case CUSTOMER = 'ROLE_CUSTOMER';
 }
