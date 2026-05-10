@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\User;
 
 use App\Entity\User;
+use App\Security\AuthenticationSuccessHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,7 @@ class RegistrationController extends AbstractController
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
-        private readonly JWTTokenManagerInterface $jwtTokenManager
+        private readonly AuthenticationSuccessHandler $authenticationSuccessHandler,
     ) {
     }
 
@@ -36,10 +37,6 @@ class RegistrationController extends AbstractController
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        $token = $this->jwtTokenManager->create($user);
-
-        return $this->json([
-            'token' => $token,
-        ], Response::HTTP_CREATED);
+        return $this->authenticationSuccessHandler->handle($user);
     }
 }
