@@ -17,8 +17,11 @@ security:
             stateless: true
             json_login:
                 check_path: /api/login_check
-                success_handler: lexik_jwt_authentication.handler.authentication_success
+                success_handler:  App\Security\LoginSuccessHandler
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+                username_path: email
+                password_path: password
 
         refresh:
             pattern: ^/api/token/refresh

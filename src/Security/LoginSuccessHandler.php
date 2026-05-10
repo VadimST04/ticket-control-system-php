@@ -5,21 +5,26 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\Entity\User;
-use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
-use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 
-readonly class AuthenticationSuccessHandler
+readonly class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
+
     public function __construct(
         private JWTTokenManagerInterface $jwtTokenManager,
-        private RefreshTokenGenerator    $refreshTokenGenerator,
+        private RefreshTokenGenerator $refreshTokenGenerator,
     ) {
     }
 
-    public function handle(User $user): JsonResponse
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token): JsonResponse
     {
+        /** @var User $user */
+        $user = $token->getUser();
+
         $token = $this->jwtTokenManager->create($user);
         $refreshToken = $this->refreshTokenGenerator->generate($user);
 
