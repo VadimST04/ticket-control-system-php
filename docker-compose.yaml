@@ -9,6 +9,12 @@ services:
                 - ./:/var/www/html
         ports:
             - "8000:8000"
+        environment:
+            DATABASE_USER: ${DATABASE_USER}
+            DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+            DATABASE_HOST: ${DATABASE_HOST}
+            DATABASE_PORT: ${DATABASE_PORT}
+            DATABASE_NAME: ${DATABASE_NAME}
         command: php -S 0.0.0.0:8000 -t public
 
     mysql:
